@@ -1,0 +1,723 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#101410">
+  <meta name="description" content="MODU entwickelt praktische 3D-Druck-Produkte für Alltag, Ordnung und Schreibtisch. Entdecke unsere Produktideen.">
+  <title>MODU – Praktische Ideen in 3D</title>
+
+  <style>
+    :root {
+      --bg: #0c100d;
+      --panel: #141a15;
+      --panel2: #1b231c;
+      --green: #b7ff4a;
+      --text: #f3f5f1;
+      --muted: #a5afa5;
+      --border: #29352a;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 85px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button, input, textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(1100px, calc(100% - 36px));
+      margin: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(12, 16, 13, 0.96);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: 5px;
+    }
+
+    .logo span {
+      color: var(--green);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      font-size: 0.93rem;
+      color: var(--muted);
+    }
+
+    nav a:hover, footer a:hover {
+      color: var(--green);
+    }
+
+    .nav-button {
+      border: 1px solid var(--green);
+      padding: 8px 14px;
+      border-radius: 8px;
+      color: var(--green);
+    }
+
+    .hero {
+      padding: 95px 0 85px;
+      background:
+        radial-gradient(ellipse at 80% 20%, rgba(183,255,74,.09), transparent 45%);
+    }
+
+    .eyebrow {
+      color: var(--green);
+      font-size: 0.78rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      line-height: 1.05;
+      letter-spacing: -3px;
+      margin: 20px 0;
+      max-width: 850px;
+    }
+
+    h1 span, .green {
+      color: var(--green);
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: 1.1rem;
+      margin-bottom: 28px;
+    }
+
+    .button {
+      display: inline-block;
+      background: var(--green);
+      color: #10160d;
+      font-weight: bold;
+      padding: 13px 20px;
+      border-radius: 9px;
+      transition: transform .2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-outline {
+      display: inline-block;
+      padding: 12px 19px;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      margin-left: 8px;
+    }
+
+    .button-outline:hover {
+      border-color: var(--green);
+    }
+
+    section {
+      padding: 75px 0;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.15;
+      margin: 10px 0 15px;
+      letter-spacing: -1px;
+    }
+
+    .section-intro {
+      max-width: 680px;
+      color: var(--muted);
+      margin-bottom: 32px;
+    }
+
+    .idea-panel {
+      border: 1px solid var(--border);
+      background: linear-gradient(135deg, var(--panel2), var(--panel));
+      padding: clamp(24px, 5vw, 48px);
+      border-radius: 20px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 35px;
+      align-items: center;
+    }
+
+    .idea-panel h3 {
+      font-size: 1.65rem;
+      margin-bottom: 12px;
+    }
+
+    .idea-panel p {
+      color: var(--muted);
+    }
+
+    .idea-mark {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      min-height: 210px;
+      display: grid;
+      place-items: center;
+      background: rgba(0,0,0,.15);
+    }
+
+    .idea-mark strong {
+      font-size: clamp(3.5rem, 9vw, 6rem);
+      letter-spacing: 9px;
+      color: var(--green);
+    }
+
+    .idea-mark span {
+      display: block;
+      text-align: center;
+      font-size: .75rem;
+      color: var(--muted);
+      letter-spacing: 2px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .product {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 25px;
+      background: var(--panel);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      min-height: 280px;
+    }
+
+    .product-symbol {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(183,255,74,.3);
+      background: rgba(183,255,74,.07);
+      color: var(--green);
+      border-radius: 12px;
+      font-size: 1.5rem;
+      margin-bottom: 22px;
+    }
+
+    .product h3 {
+      font-size: 1.25rem;
+      margin-bottom: 7px;
+    }
+
+    .product p {
+      font-size: .92rem;
+      color: var(--muted);
+      margin-bottom: 18px;
+    }
+
+    .status {
+      display: inline-block;
+      color: var(--green);
+      background: rgba(183,255,74,.07);
+      border: 1px solid rgba(183,255,74,.2);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: .72rem;
+      font-weight: bold;
+      margin-top: auto;
+    }
+
+    .product-link {
+      margin-top: 16px;
+      font-size: .9rem;
+      color: var(--green);
+      font-weight: bold;
+    }
+
+    .values {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .value {
+      padding: 23px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+    }
+
+    .value .number {
+      color: var(--green);
+      font-size: .8rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .value h3 {
+      margin: 12px 0 8px;
+    }
+
+    .value p {
+      color: var(--muted);
+      font-size: .92rem;
+    }
+
+    .roadmap {
+      padding: clamp(24px, 5vw, 42px);
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: var(--panel);
+    }
+
+    .roadmap-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+      margin-top: 28px;
+    }
+
+    .roadmap-step {
+      border-top: 2px solid var(--green);
+      padding-top: 15px;
+    }
+
+    .roadmap-step strong {
+      display: block;
+      margin-bottom: 7px;
+    }
+
+    .roadmap-step p {
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .contact-panel {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: linear-gradient(120deg, var(--panel2), var(--panel));
+      padding: clamp(25px, 5vw, 45px);
+    }
+
+    .contact-panel p {
+      max-width: 650px;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 28px 0;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-note {
+      margin-top: 15px;
+      font-size: .78rem;
+    }
+
+    @media (max-width: 760px) {
+      .hero {
+        padding: 65px 0;
+      }
+
+      .idea-panel {
+        grid-template-columns: 1fr;
+      }
+
+      .product-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .values, .roadmap-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        width: calc(100% - 28px);
+      }
+
+      .nav {
+        min-height: 66px;
+      }
+
+      .logo {
+        font-size: 1.45rem;
+      }
+
+      nav {
+        gap: 12px;
+        font-size: .82rem;
+      }
+
+      nav a:nth-child(2) {
+        display: none;
+      }
+
+      .product-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .button-outline {
+        margin: 12px 0 0;
+      }
+
+      section {
+        padding: 55px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#start" class="logo" aria-label="MODU Startseite">M<span>O</span>DU</a>
+      <nav aria-label="Hauptnavigation">
+        <a href="#idee">Unsere Idee</a>
+        <a href="#produkte">Produkte</a>
+        <a href="#kontakt" class="nav-button">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="start">
+      <div class="container">
+        <div class="eyebrow">Ideen in 3D · Marke MODU</div>
+        <h1>Praktische Ideen.<br><span>Neu gedacht.</span></h1>
+        <p>
+          MODU entwickelt clevere 3D-Druck-Produkte für den Alltag.
+          Von Ordnung am Schreibtisch bis zu praktischen Helfern für Zuhause:
+          Wir machen aus einfachen Ideen durchdachte Produktkonzepte.
+        </p>
+        <a class="button" href="#produkte">Unsere Produktreihe entdecken ↓</a>
+        <a class="button-outline" href="#idee">Die MODU-Idee</a>
+      </div>
+    </section>
+
+    <section id="idee">
+      <div class="container">
+        <div class="eyebrow">Was ist MODU?</div>
+        <h2 class="section-title">Mehr als 3D-Druck.</h2>
+        <p class="section-intro">
+          Wir wollen Dinge entwickeln, die ein echtes Problem lösen:
+          weniger Kabelchaos, mehr Ordnung und praktische Lösungen für kleine
+          Alltagsprobleme. Jedes Produkt beginnt als Idee und wird Schritt für
+          Schritt weiterentwickelt.
+        </p>
+
+        <div class="idea-panel">
+          <div>
+            <h3>Eine eigene Reihe. Eine klare Idee.</h3>
+            <p>
+              MODU steht für praktische Produkte, schlichtes Design und
+              durchdachte Details. Wir starten mit kleinen Projekten,
+              prüfen ihre Umsetzbarkeit und verbessern unsere Entwürfe,
+              bevor sie als fertige Produkte angeboten werden.
+            </p>
+          </div>
+          <div class="idea-mark">
+            <div>
+              <strong>MODU</strong>
+              <span>DESIGNED WITH PURPOSE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="produkte">
+      <div class="container">
+        <div class="eyebrow">Die MODU-Reihe</div>
+        <h2 class="section-title">Unsere Produktideen.</h2>
+        <p class="section-intro">
+          Eine wachsende Reihe von Konzepten für Alltag, Schreibtisch,
+          Ordnung und Freizeit. Die Produkte werden nach und nach entwickelt.
+        </p>
+
+        <div class="product-grid">
+          <article class="product">
+            <div class="product-symbol" aria-hidden="true">H</div>
+            <h3>MODU Headset Holder</h3>
+            <p>
+              Ein schlichter Kopfhörerständer mit stabilem Standfuß
+              und MODU-Schriftzug an der Vorderseite.
+            </p>
+            <span class="status">Konzept in Entwicklung</span>
+            <a class="product-link" href="#kontakt"
+               data-product="MODU Headset Holder">Interesse mitteilen →</a>
+          </article>
+
+          <article class="product">
+            <div class="product-symbol" aria-hidden="true">C</div>
+            <h3>MODU Clip</h3>
+            <p>
+              Eine kompakte Lösung, um Ladekabel und andere Kabel
+              am Schreibtisch ordentlich zu führen.
+            </p>
+            <span class="status">Konzept</span>
+            <a class="product-link" href="#kontakt"
+               data-product="MODU Clip">Interesse mitteilen →</a>
+          </article>
+
+          <article class="product">
+            <div class="product-symbol" aria-hidden="true">B</div>
+            <h3>MODU Box</h3>
+            <p>
+              Eine kleine Aufbewahrungslösung für alltägliche
+              Kleinteile, Zubehör und Schreibtischgegenstände.
+            </p>
+            <span class="status">Idee</span>
+            <a class="product-link" href="#kontakt"
+               data-product="MODU Box">Interesse mitteilen →</a>
+          </article>
+
+          <article class="product">
+            <div class="product-symbol" aria-hidden="true">O</div>
+            <h3>MODU Organizer</h3>
+            <p>
+              Ein geplanter Helfer, um kleine Gegenstände übersichtlich
+              zu sortieren und schneller wiederzufinden.
+            </p>
+            <span class="status">Idee</span>
+            <a class="product-link" href="#kontakt"
+               data-product="MODU Organizer">Interesse mitteilen →</a>
+          </article>
+
+          <article class="product">
+            <div class="product-symbol" aria-hidden="true">D</div>
+            <h3>MODU Desk</h3>
+            <p>
+              Praktische Ergänzungen für den Arbeitsplatz:
+              kompakt, ordentlich und auf den Alltag ausgelegt.
+            </p>
+            <span class="status">Ideensammlung</span>
+            <a class="product-link" href="#kontakt"
+               data-product="MODU Desk">Interesse mitteilen →</a>
+          </article>
+
+          <article class="product">
+            <div class="product-symbol" aria-hidden="true">+</div>
+            <h3>Weitere Ideen</h3>
+            <p>
+              Die MODU-Reihe soll wachsen. Neue Produkte entstehen
+              aus Problemen, für die eine einfache Lösung fehlt.
+            </p>
+            <span class="status">In Planung</span>
+            <a class="product-link" href="#kontakt"
+               data-product="Neue Produktidee">Idee vorschlagen →</a>
+          </article>
+        </div>
+
+        <p style="color:var(--muted); font-size:.85rem; margin-top:22px;">
+          Hinweis: Die gezeigten Einträge sind Produktkonzepte oder Ideen.
+          Sie wurden noch nicht alle konstruiert, gedruckt oder getestet
+          und sind derzeit nicht bestellbar.
+        </p>
+      </div>
+    </section>
+
+    <section id="philosophie">
+      <div class="container">
+        <div class="eyebrow">Unsere Prinzipien</div>
+        <h2 class="section-title">Klein starten. Gut entwickeln.</h2>
+        <p class="section-intro">
+          Wir möchten nicht einfach beliebige Dinge drucken.
+          Wir wollen Produkte schaffen, die nützlich, verständlich
+          und sinnvoll gestaltet sind.
+        </p>
+
+        <div class="values">
+          <article class="value">
+            <div class="number">01 / NUTZEN</div>
+            <h3>Praktische Lösungen</h3>
+            <p>Jede Produktidee soll einen konkreten Zweck im Alltag erfüllen.</p>
+          </article>
+
+          <article class="value">
+            <div class="number">02 / DESIGN</div>
+            <h3>Schlicht und durchdacht</h3>
+            <p>Klare Formen und funktionale Details statt unnötiger Extras.</p>
+          </article>
+
+          <article class="value">
+            <div class="number">03 / ENTWICKLUNG</div>
+            <h3>Erst testen, dann anbieten</h3>
+            <p>Wir prüfen Konstruktion, Stabilität und Alltagstauglichkeit vor einem möglichen Verkauf.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="entwicklung">
+      <div class="container">
+        <div class="roadmap">
+          <div class="eyebrow">Von der Idee zum Produkt</div>
+          <h2 class="section-title">Unser Weg.</h2>
+          <p class="section-intro">
+            Wir bauen MODU Schritt für Schritt auf und zeigen offen,
+            wie weit unsere Produkte entwickelt sind.
+          </p>
+
+          <div class="roadmap-list">
+            <div class="roadmap-step">
+              <strong>01. Entwurf</strong>
+              <p>Produktidee, Form, Maße und CAD-Modell planen.</p>
+            </div>
+            <div class="roadmap-step">
+              <strong>02. Prototyp</strong>
+              <p>Modell drucken und Passform, Stabilität und Funktion testen.</p>
+            </div>
+            <div class="roadmap-step">
+              <strong>03. Verbesserung</strong>
+              <p>Entwurf optimieren und erst danach über einen möglichen Verkauf entscheiden.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="kontakt">
+      <div class="container">
+        <div class="contact-panel">
+          <div class="eyebrow">Kontakt zu MODU</div>
+          <h2 class="section-title">Du hast eine Idee?</h2>
+          <p>
+            Fragen, Feedback oder ein Vorschlag für ein neues Produkt?
+            Wir freuen uns über Nachrichten. Aktuell dient der Kontakt
+            dem Austausch – Bestellungen sind noch nicht möglich.
+          </p>
+          <a class="button" id="contactButton" href="#kontakt">Kontakt aufnehmen →</a>
+          <p id="contactHint" style="font-size:.82rem; margin-top:14px; margin-bottom:0;">
+            Die Kontaktadresse muss noch im Code eingerichtet werden.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <a href="#start" class="logo">M<span>O</span>DU</a>
+        <div class="footer-links">
+          <a href="#idee">Unsere Idee</a>
+          <a href="#produkte">Produkte</a>
+          <a href="#kontakt">Kontakt</a>
+        </div>
+        <span>© <span id="year"></span> MODU</span>
+      </div>
+      <p class="footer-note">
+        Produktkonzepte in Entwicklung · Noch keine Bestellungen möglich.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    // Trage deine Kontakt-E-Mail zwischen die Anführungszeichen ein.
+    const CONTACT_EMAIL = "modu.druck@gmail.com";
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+    const contactButton = document.getElementById("contactButton");
+    const contactHint = document.getElementById("contactHint");
+
+    function updateContactLink(productName) {
+      if (!CONTACT_EMAIL.trim()) {
+        contactHint.textContent =
+          "Die Kontaktadresse muss noch im Code eingerichtet werden.";
+        return;
+      }
+
+      const subject = productName
+        ? "MODU – Interesse: " + productName
+        : "Nachricht an MODU";
+
+      contactButton.href =
+        "mailto:" + CONTACT_EMAIL.trim() +
+        "?subject=" + encodeURIComponent(subject);
+
+      contactHint.textContent =
+        "Dein E-Mail-Programm öffnet sich. Du kannst die Nachricht vor dem Senden bearbeiten.";
+    }
+
+    document.querySelectorAll("[data-product]").forEach(function (link) {
+      link.addEventListener("click", function () {
+        updateContactLink(link.dataset.product);
+      });
+    });
+
+    contactButton.addEventListener("click", function (event) {
+      if (!CONTACT_EMAIL.trim()) {
+        event.preventDefault();
+        contactHint.textContent =
+          "Bitte trage zuerst deine E-Mail-Adresse bei CONTACT_EMAIL im Code ein.";
+      } else {
+        updateContactLink("");
+      }
+    });
+
+    updateContactLink("");
+  </script>
+</body>
+</html>
